@@ -5,12 +5,12 @@ import CadastroEvento from "../../assets/img/cadastrotipoevento.png"
 import Cadastro from "../../components/cadastro/Cadastro";
 
 const CadastroTipoDeEvento = () => {
-    return(
-    <>
-    
-    <Header/>
-        <main>
-        <Cadastro tituloCadastro="Cadastro de evento"
+    return (
+        <>
+
+            <Header />
+            <main>
+                <Cadastro tituloCadastro="Cadastro de evento"
                     campoPlaceholder="evento"
                     visibilidade="none"
                     nomeplacehoderr="nome"
@@ -20,20 +20,20 @@ const CadastroTipoDeEvento = () => {
 
                 />
 
-        </main>
-    {/* <Cadastro/> */}
-    
-    <Lista
-    tituloLista = ""
-    titulo = "Titulo"
-    visibilidade = "none"
+            </main>
+            {/* <Cadastro/> */}
 
-    /> 
-        
-     
-    <Footer/>
-    
-    </>
+            <Lista
+                tituloLista=""
+                titulo="Titulo"
+                visibilidade="none"
+
+            />
+
+
+            <Footer />
+
+        </>
     )
 }
 
