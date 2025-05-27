@@ -1,19 +1,28 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import { BrowserRouter, Route, Routes } from "react-router";
 import Login from "../pages/login/Login";
-import CadastroDeEventos from "../pages/cadastroDeEventos/CadastroDeEvento";
-import CadastroTipoDeEvento from "../pages/cadastroTipoDeEvento/CadastroTipoDeEvento";
+// import Home from "../pages/home/Home";
+// import ListagemEventos from "../pages/listagemEventos/ListagemEventos";
 
-
+import CadastroDeEventos from "../pages/cadastroDeEventos/cadastroDeEventos";
+import CadastroTipoEvento from "../pages/cadastroTipoEvento/CadastroTipoEvento";
+import CadastroTipoUsuario from "../pages/tipoUsuarios/TipoUsuario";
 
 const Rotas = () => {
-    return(
+    return (
         <BrowserRouter>
             <Routes>
-                {/*   / => Login  */}
-                <Route path="/" element={<Login/>} exact />
-                {/*   /CadastroFilme  => cadastro filme*/}
-                <Route path="/Eventos" element={<CadastroDeEventos/>} />
-                <Route path="/CadastroTipoEvento" element={<CadastroTipoDeEvento/>} />
+                <Route path="/" element={<Login/>} exact/>
+
+                {/* <Route path="/Home" element={<Home/>} exact/> */}
+
+                <Route path="/TipoEvento" element={<CadastroTipoEvento/>}/>
+
+                <Route path="/Evento" element={<CadastroDeEventos/>}/>
+
+                {/* <Route path="/Listagem" element={<ListagemEventos/>}/> */}
+
+                <Route path="/TipoUsuario" element={<CadastroTipoUsuario/>}/>
             </Routes>
         </BrowserRouter>
     )
