@@ -1,13 +1,13 @@
 import React from "react";
-import "./Toggle.css"
+import "./toggle.css"
 
 const Toggle = () => {
     return (
         <>
             <div className="teste">
-                <label  className="switch">
-                    <input  type="checkbox" />
-                        <span className="slider round"></span>
+                <label className="switch">
+                    <input type="checkbox" />
+                    <span class="slider round"></span>
                 </label>
             </div>
         </>

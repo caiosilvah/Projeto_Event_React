@@ -1,20 +1,19 @@
-
 .switch {
     position: relative;
     display: inline-block;
-    width: 45px;
-    height: 25px;
+    width: 60px;
+    height: 34px;
   }
   
-  /* Hide default HTML checkbox */
+  /* Ocultar caixa de seleção HTML padrão */
   .switch input {
     opacity: 0;
     width: 0;
     height: 0;
   }
   
-  /* The slider */
-  .slider {
+  /* O controle deslizante */
+  .slider {   
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -29,8 +28,8 @@
   .slider:before {
     position: absolute;
     content: "";
-    height: 15px;
-    width: 15px;
+    height: 26px;
+    width: 26px;
     left: 4px;
     bottom: 4px;
     background-color: white;
@@ -39,11 +38,11 @@
   }
   
   input:checked + .slider {
-    background-color: #B51D44;
+    background-color: #ff0000;
   }
   
   input:focus + .slider {
-    box-shadow: 0 0 1px #B51D44;
+    box-shadow: 0 0 1px #e7dfdf;
   }
   
   input:checked + .slider:before {
@@ -52,7 +51,7 @@
     transform: translateX(26px);
   }
   
-  /* Rounded sliders */
+  /* Controles deslizantes arredondados */
   .slider.round {
     border-radius: 34px;
   }
