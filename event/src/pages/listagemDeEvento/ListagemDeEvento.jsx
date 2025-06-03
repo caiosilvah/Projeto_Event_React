@@ -8,7 +8,6 @@ import { useState } from "react";
 import Toggle from "../../components/toggle/toggle";
 
 
-
 const ListagemEventos = () => {
     const [toggled, setToggled] = useState(false);
     return (
@@ -37,7 +36,7 @@ const ListagemEventos = () => {
                             <td data-cell="Nome" >Nome Evento</td>
                             <td data-cell="Evento">Tipo Evento</td>
                             <td data-cell="Editar"><img src={Comentario} alt="Imagem de comentar" /></td>
-                            <td data-cell="Botao"><Toggle/></td>                       
+                            <td data-cell="Botao"><Toggle /></td>
                         </tr>
                     </tbody>
                     <tbody>
@@ -45,14 +44,15 @@ const ListagemEventos = () => {
                             <td data-cell="Nome" >Nome Evento</td>
                             <td data-cell="Evento">Tipo Evento</td>
                             <td data-cell="Editar"><img src={Comentario} alt="Imagem de comentar" /></td>
-                            <td data-cell="Botao"><Toggle/></td>
+                            <td data-cell="Botao"><Toggle /></td>
                         </tr>
                     </tbody>
                 </div>
             </section>
             <Footer />
+            <Modal/>
         </>
     )
 }
 
-export default ListagemEventos;
+export default ListagemEventos;    
