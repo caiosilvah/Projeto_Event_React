@@ -1,3 +1,4 @@
+
 .select_evento{
     border-left: none;
     border-right: none;
@@ -10,6 +11,7 @@
     color: #201849;
     display: flex;
 }
+
 
 .listagem_evento{
     height: 570px;

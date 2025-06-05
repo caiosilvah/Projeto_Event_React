@@ -12,7 +12,7 @@ const CadastroTipoEvento = () => {
 
     const [tipoEvento, setTipoEvento] = useState("");
     const [listaTipoEvento, setListaTipoEvento] = useState([]);
-    const [atualizaTipoEvento, setAtualizarTipoEvento] = useState(false);
+    // const [atualizaTipoEvento, setAtualizarTipoEvento] = useState(false);
 
     function alertar(icone, mensagem) {
         const Toast = Swal.mixin({
@@ -135,6 +135,8 @@ const CadastroTipoEvento = () => {
         }
     }
 
+    
+
     useEffect(() => {
         listarTipoEvento();
     }, [listaTipoEvento]);
@@ -159,6 +161,7 @@ const CadastroTipoEvento = () => {
                     lista={listaTipoEvento}
                     chaveNome="tituloTipoEvento"
                     chaveId="idTipoEvento"
+                    nomePlace="Titulo"
                     visibilidade="table-cell"
                     funcEditar={atualizarTipoEvento}
                     funcExcluir={excluirTipoEvento}
