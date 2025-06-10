@@ -22,31 +22,34 @@ const ListagemEventos = () => {
     const [dadosModal, setDadosModal] = useState({}); // descricaoEvento, idEvento, etc.
     const [modalAberto, setModalAberto] = useState(false);
 
+    //filtro
+    const [filtroData, setFiltroData] = useState(["todos"])
+  
+
     const [usuarioId, setUsuarioId] = useState("5DFBD257-AA7E-4067-8B7B-CDEE2A6C406C")
     
 
+
     async function listarEventos() {
         try {
-            const resposta = await api.get("Eventos")
+            const resposta = await api.get("eventos")
             const todosOsEventos = resposta.data;
+
             const respostaPresenca = await api.get("PresencasEventos/ListarMinhas/" + usuarioId)
             const minhasPresencas = respostaPresenca.data;
+
             const eventosComPresencas = todosOsEventos.map((atualEvento) => {
                 const presenca = minhasPresencas.find(p => p.idEvento === atualEvento.idEvento);
 
-                //modal:
-
-
-
-                return {
-                    ...atualEvento, possuiPresenca: presenca?.situacao === true, idPresenca: presenca?.idPresencaEvento || null
-
-
+                return{
+                    // AS INFORMACOES TANTO DE EVENTOS QUANTO DE EVENTOS QUE POSSUEM PRESENCA
+                    ...atualEvento,  // Mantem os dados originais do evento atual
+                    possuiPresenca: presenca?. situacao === true,
+                    idPresenca: presenca?. idPresencaEvento || null
                 }
             })
 
-            setListaEvento(eventosComPresencas);
-            // console.log (`informacoes de`)
+            setListaEvento(eventosComPresencas)
 
 
         } catch (error) {
@@ -56,6 +59,8 @@ const ListagemEventos = () => {
     useEffect(() => {
         listarEventos();
     }, [])
+
+
 
     function abrirModal(tipo, dados) {
         //tipo de modal
@@ -72,39 +77,42 @@ const ListagemEventos = () => {
     }
 
     async function manipularPresenca(idEvento, presenca, idPresenca) {
+        console.log("aaaaaa");
+        console.log(idPresenca);
+        
         try {
             if (presenca && idPresenca != "") {
-                await api.put(`PrecensasEventos/${idPresenca}`,
-                    { situacao: false });
-                Swal.fire('Removido!', 'Sua Presenca foi removida.', 'sucesess');
-            } else if (idPresenca != "") {
-                await api.put(`PrecensasEventos/${idPresenca}`,
-                    { situacao: true });
-                Swal.fire('Removido!', 'Sua Presenca foi removida.', 'sucesess');
-            } else {
-                await api.post("PresencasEventos", {
-                    situacao: true,
-                    idUsuario: usuarioId, idEvento: idEvento
-                });
-                Swal.fire('Removido!', 'Sua Presenca foi removida.', 'sucesess');
+                //atualizacao: situacao para FALSE 
+                await api.put(`PresencasEventos/${idPresenca}`, {situacao: false});
+                Swal.fire ('Removido!', 'Sua presenca foi removida.', 'success')
+            }else if(idPresenca != ""){
+                //atualizacao: situacao para TRUE
+                await api.put(`PresencasEventos/${idPresenca}`, {situacao: true});
+                Swal.fire('Confirmado!', 'Sua presenca foi confirmada.', 'success')
+            }else{
+                //cadastrar uma nova presenca
+                // console.log(usuarioId);
+                console.log("aaaaaaaaaaaaaaa");
+                const resp = await api.post("PresencasEventos", {situacao: true, idUsuario: usuarioId, idEvento: idEvento });
+                console.log(resp);
+                Swal.fire('Confirmado!', 'Sua presenca foi confrimada.', 'success');
             }
-            listaEvento()
         } catch (error) {
-            console.log(error)
+            console.log(error);            
         }
     }
 
     function filtrarEventos() {
         const hoje = new Date();
 
-        return listarEventos.filter(evento => {
+        return listaEvento.filter(evento => {
             const dataEvento = new Date(evento.dataEvento);
 
             if (filtroData.includes("todos")) return true;
             if (filtroData.includes("futuros") && dataEvento > hoje)
-            return true;
+                return true;
             if (filtroData.includes("passados") && dataEvento < hoje)
-            return true;
+                return true;
 
             return false;
         })
@@ -117,14 +125,10 @@ const ListagemEventos = () => {
                 <h1>Eventos</h1>
                 <hr />
                 <div className="tabela_evento">
-                    <select onChange={(e) => setFiltroData([e.target.value])}
-                    >
-                        <option value="todos" selected> Todos os eventos</
-                        option>
-
-                        <option value="fututos">Somente futuros</option>
-                        <option value="passados">Somente passados</option>
-
+                    <select name="Todos os Eventos" id="" className="select_evento" onChange={(e) => setFiltroData([e.target.value])}>
+                        <option value="Todos" selected>Todos os Eventos</option>
+                        <option value="futuros">Somente Futuros</option>
+                        <option value="Passados">Somente Passados</option>
                     </select>
                     <table>
                         <thead>
@@ -151,7 +155,8 @@ const ListagemEventos = () => {
                                         <td>
                                             <img src={Comentario} alt="icon" onClick={() => abrirModal("comentarios", { idEvento: item.idEvento })} />
                                         </td>
-                                        <td data-cell="Botao"><Toggle presenca={item.possuiPresenca} manipular={() => manipularPresenca = (item.idEvento, item.possuiPresenca, item.idPresenca)} /></td>
+                                        <td data-cell="Botao"><Toggle presenca={item.possuiPresenca} 
+                                        manipular= {() => manipularPresenca(item.idEvento, item.possuiPresenca, item.idPresenca)}/></td>
                                     </tr>
                                 ))
                             ) : (
@@ -166,7 +171,7 @@ const ListagemEventos = () => {
 
             {modalAberto && (
                 < Modal
-                    titulo={tipoModal === "descricaoEvento" ? "Descricao do evento" : "Comentario"}
+                    titulo={tipoModal == "descricaoEvento" ? "Descricao do evento" : "Comentario"}
                     tipoModel={tipoModal}
 
                     idEvento={dadosModal.idEvento}
@@ -179,4 +184,4 @@ const ListagemEventos = () => {
     )
 }
 
-export default ListagemEventos;
+export default ListagemEventos;     
