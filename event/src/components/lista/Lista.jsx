@@ -1,7 +1,7 @@
 import "./Lista.css"
 import Editar from "../../assets/img/Editar.png"
 import Excluir from "../../assets/img/Excluir.png"
-import Descricao from "../../assets/img/descricao.png.png"
+import Descricao from "../../assets/img/descricao.png"
 
 const Lista = (props) => {
     return (

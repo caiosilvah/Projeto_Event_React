@@ -5,11 +5,11 @@ import CadastroTipoEvento from "../pages/cadastroTipoEvento/cadastroTipoEvento"
 import CadastroTipoUsuario from "../pages/cadastroTipoUsuario/cadastroTipoUsuario"
 import Login from "../pages/login/Login"
 import ListagemEventos from "../pages/listagemDeEvento/ListagemDeEvento";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/"
 import TelaHome from "../pages/telaHome/telaHome"
 
 const Privado = (props) => {
-    const {usuario} = useAuth;
+    const {usuario} = useAuth();
     //tke, idUsuario, tipoUsuario
 
     // Se nao estiver authenticado, mada para login

@@ -24,7 +24,7 @@ const Modal = (props) => {
 
   useEffect(() => {
     listarComentarios();
-  }, [])
+  }, [comentarios])
 
     async function cadastrarComentarios(comentario) {
       try {
@@ -35,9 +35,9 @@ const Modal = (props) => {
       }
     }
 
-    async function deletarComentario(idComentarioEvento) {
+    async function deletarComentario(idComentario) {
       try {
-        await api.delete(`ComentariosEventos/${idComentarioEvento}`);
+        await api.delete(`ComentariosEventos/${idComentario}`);
       } catch (error) {
         console.log(error);
         
